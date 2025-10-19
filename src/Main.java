@@ -3,6 +3,10 @@
  * @author stephan knappstein A01208242
  * @version 1.0
  */
+/* To Do's
+ * JavaDoc HTML file .zip, Java docs for classes and methods,
+code comments, coding standards are followed, UML diagram.
+ */
 
 public class Main {
     public static void main(String[] args) {
