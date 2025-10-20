@@ -1,6 +1,9 @@
 /**
+ * 
  * Represents an operation that takes a string and an integer and produces a string.
  * This is a functional interface whose functional method is {@link #createString(String, int)}.
+ * @author stephan knappstein A01208242
+ * @version 1.0
  */
 @FunctionalInterface
 public interface Wordable {

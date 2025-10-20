@@ -3,10 +3,7 @@
  * @author stephan knappstein A01208242
  * @version 1.0
  */
-/* To Do's
- * JavaDoc HTML file .zip, Java docs for classes and methods,
-code comments, coding standards are followed, UML diagram.
- */
+
 
 public class Main {
     public static void main(String[] args) {
@@ -45,12 +42,11 @@ public class Main {
             }
             return result;
         };
-
-            String concatenatedString = wordy.createString(argWord, 0);
-            System.out.println("\nCommand Line argument : " + argWord);
-        
-            System.out.println(concatenatedString);
+           String concatenatedString = wordy.createString(argWord, 0); 
+           System.out.println("\nCommand Line argument : " + argWord);
+           System.out.println(concatenatedString);
         }
+        
         /* If the first command line argument is "repeat" then Wordable returns a String with words repeated args[1] times and concatanated together */ 
         if ("repeat".equalsIgnoreCase(argWord) && args.length == 2) {
             /**
@@ -99,7 +95,15 @@ public class Main {
         * word of the array list in WordDictionary
         */
         if ("reverse".equalsIgnoreCase(argWord) && args.length == 1) {
-          //appropriate lambda expression
+          /**
+           * A lambda expression that implements the Wordable interface to reverse each word and concatenate them.
+           * It iterates through the list of words from WordDictionary, reverses each word individually,
+           * and then joins all the reversed words into a single string.
+           * @param s The input string, which is unused.
+           * @param n The input integer, which is unused.
+           * @return A single string containing the concatenation of all words from the dictionary after each has
+           *         been reversed.
+           */
             Wordable wordy = (s, n) -> {
             String result = "";
             for (String word : WordDictionary.getWords()) {
@@ -115,16 +119,29 @@ public class Main {
             String reverseString = wordy.createString(argWord, 0);
             System.out.println("\nCommand Line argument : " + argWord);
             System.out.println(reverseString);
-        }  
-            // Here we use a method reference to a static method.
-            // The `Runnable` interface is a perfect fit for a method that takes no arguments and returns nothing.
+        }
+            /**
+             * A Runnable that holds a method reference to the static {@link #printAll()} method.
+             * This demonstrates a method reference to a static method. When {@code run()} is called
+             * on this Runnable, it executes the {@code printAll} method, printing all words from the
+             * WordDictionary to the console. This serves as a default action if no other command-line
+             * arguments match.
+             */
             Runnable displayAll = Main::printAll;
             displayAll.run(); // This executes the printAll method.
         
         } // end of main method
-        /**
+
+        
+    /**
      * Prints all words from the WordDictionary to the console, each on a new line.
-     * This method uses a method reference for concise and modern Java code.
+     * <p>
+     * This method serves as a default action within the main application logic, executed
+     * when no specific command-line arguments like "concat" or "repeat" are provided.
+     * It demonstrates the use of a method reference ({@code System.out::println}) with the
+     * {@code forEach} method to iterate over and display the contents of the word list.
+     *
+     * @see WordDictionary#getWords()
      */
     public static void printAll() {
         System.out.println("\nDefault implementation of method reference:");

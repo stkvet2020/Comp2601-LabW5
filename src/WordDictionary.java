@@ -4,6 +4,8 @@ import java.util.List;
 /**
  * A dictionary class containing a predefined list of words.
  * This class provides a static list of words for use in the application.
+ * @author stephan knappstein A01208242
+ * @version 1.0
  */
 public class WordDictionary {
 
