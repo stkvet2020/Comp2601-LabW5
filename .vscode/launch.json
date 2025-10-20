@@ -12,7 +12,7 @@
             "mainClass": "Main",
             
             "args": [
-                "nth","2"
+                "reverse"
                 
             ]
         }
