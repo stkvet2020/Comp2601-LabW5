@@ -18,6 +18,7 @@ public class Main {
             }
             return result;
         };
+
         Wordable repeat = (s, n) -> {  
             String result = "";
             for (String word : WordDictionary.getWords()) {
@@ -32,7 +33,7 @@ public class Main {
 
         };
 
-        //rewrite 
+        
         Wordable reverse = (s, n) -> {
             String result = "";
             for (String word : WordDictionary.getWords()) {
@@ -87,7 +88,16 @@ public class Main {
 
         /* If the first command line argument is "repeat" then Wordable returns a String with words repeated args[1] times and concatanated together */ 
         if ("repeat".equalsIgnoreCase(argWord) && args.length == 2) {
-            String repeatedWordConcatanated = repeat.createString(argWord, argInt);
+           // appropriate lambda expresion 
+            Wordable wordy = (s, n) -> {  
+            String result = "";
+            for (String word : WordDictionary.getWords()) {
+                result =result + word.repeat(n);
+            }
+            return result;
+         };
+
+            String repeatedWordConcatanated = wordy.createString(argWord, argInt);
             System.out.println("/nCommand Line argument args[0]: " + argWord + " args[1]: " + argInt);
             System.out.println(repeatedWordConcatanated);
         }
@@ -97,8 +107,17 @@ public class Main {
         * word of the array list in WordDictionary
         */
          if ("nth".equalsIgnoreCase(argWord) && args.length == 2) {
-            String nthWord = nth.createString(argWord,argInt);
-            System.out.println("\nCommand Line argument : " + argWord + " args[1]: " + argInt+ " will return the "+ argInt+  "th word of the list ");
+            //appropriate lambda expression
+            Wordable wordy= (s,n) -> {
+           String nthWord = WordDictionary.getWords().get(n);
+            return nthWord;
+
+        };
+
+
+
+            String nthWord = wordy.createString(argWord,argInt);
+            System.out.println("\nCommand Line argument : " + argWord + " args[1]: " + argInt+ " will return the "+ (argInt+1) + "th word of the list ");
             System.out.println("Which is : " + nthWord);
         } 
         /*If the only command line argument is 'reverse' the Wordable returns the 
