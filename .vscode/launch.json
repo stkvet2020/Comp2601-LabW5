@@ -12,7 +12,7 @@
             "mainClass": "Main",
             
             "args": [
-                "reverse"
+                "concat"
                 
             ]
         }

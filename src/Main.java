@@ -69,8 +69,17 @@ public class Main {
      /*  If the first command line argument is "concat" then Wordable returns a String with all words concatanated  together */
             
         if ("concat".equalsIgnoreCase(argWord) && args.length == 1) {
-            String concatenatedString = concat.createString(argWord, 0);
-            System.out.println("/nCommand Line argument : " + argWord);
+            // expressionLambda
+            Wordable wordy = (s, n) -> {
+            String result = "";
+            for (String word : WordDictionary.getWords()) {
+                result =result + word;
+            }
+            return result;
+        };
+
+            String concatenatedString = wordy.createString(argWord, 0);
+            System.out.println("\nCommand Line argument : " + argWord);
         
             System.out.println(concatenatedString);
         }
@@ -91,7 +100,7 @@ public class Main {
             String nthWord = nth.createString(argWord,argInt);
             System.out.println("\nCommand Line argument : " + argWord + " args[1]: " + argInt+ " will return the "+ argInt+  "th word of the list ");
             System.out.println("Which is : " + nthWord);
-        } else {System.out.println("Incorrect number of arguments was provided");}
+        } 
         /*If the only command line argument is 'reverse' the Wordable returns the 
         * word of the array list in WordDictionary
         */
@@ -101,7 +110,7 @@ public class Main {
             System.out.println(reverseString);
         } 
 
-        
+
          // Here we use a method reference to a static method.
             // The `Runnable` interface is a perfect fit for a method that takes no arguments and returns nothing.
             Runnable displayAll = Main::printAll;
@@ -115,7 +124,8 @@ public class Main {
      * This method uses a method reference for concise and modern Java code.
      */
     public static void printAll() {
-        System.out.println("\nAll words in the dictionary:");
+        System.out.println("\nDefault implementation of method reference:");
+        System.out.println("    All words in the dictionary:");
         WordDictionary.getWords().forEach(System.out::println);
     }
     
