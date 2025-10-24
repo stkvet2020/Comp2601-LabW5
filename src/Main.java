@@ -6,7 +6,17 @@
 
 
 public class Main {
+     public static final int MIN_WORD_SIZE;
+
+    static{
+        MIN_WORD_SIZE = 0;
+    }
+
     public static void main(String[] args) {
+       
+       WordDictionary dictionary = new WordDictionary();
+       
+       
         if (args.length == 0) {
             System.out.println("No data entered. Please provide a word as a command-line argument.");
             return; // Exit the main method gracefully.
@@ -25,6 +35,7 @@ public class Main {
             }
         }
 
+        Wordable wordy;
         /*  If the first command line argument is "concat" then Wordable returns a String with all words concatanated  together */
         if ("concat".equalsIgnoreCase(argWord) && args.length == 1) {
             /**
@@ -35,20 +46,20 @@ public class Main {
              * @param n The input integer, which is unused.
              * @return A single string containing all words from the dictionary concatenated together.
              */
-            Wordable wordy = (s, n) -> {
+             wordy = (s, n) -> {
             String result = "";
             for (String word : WordDictionary.getWords()) {
                 result =result + word;
             }
             return result;
         };
-           String concatenatedString = wordy.createString(argWord, 0); 
+           /*String concatenatedString = wordy.createString(argWord, 0); 
            System.out.println("\nCommand Line argument : " + argWord);
-           System.out.println(concatenatedString);
+           System.out.println(concatenatedString);*/
         }
         
         /* If the first command line argument is "repeat" then Wordable returns a String with words repeated args[1] times and concatanated together */ 
-        if ("repeat".equalsIgnoreCase(argWord) && args.length == 2) {
+       else if ("repeat".equalsIgnoreCase(argWord) && args.length == 2) {
             /**
              * A lambda expression that implements the Wordable interface to repeat and concatenate all words.
              * It iterates through the list of words from WordDictionary, repeats each word 'n' times,
@@ -58,7 +69,7 @@ public class Main {
              * @return A single string containing all words from the dictionary, with each word repeated 'n'
              *         times and then concatenated.
              */
-            Wordable wordy = (s, n) -> {  
+             wordy = (s, n) -> {  
             String result = "";
             for (String word : WordDictionary.getWords()) {
                 result =result + word.repeat(n);
@@ -66,14 +77,14 @@ public class Main {
             return result;
          };
 
-            String repeatedWordConcatanated = wordy.createString(argWord, argInt);
+           /*  String repeatedWordConcatanated = wordy.createString(argWord, argInt);
             System.out.println("/nCommand Line argument args[0]: " + argWord + " args[1]: " + argInt);
-            System.out.println(repeatedWordConcatanated);
+            System.out.println(repeatedWordConcatanated);*/
         }
        /*If the first command line argument is 'nth' the Wordable returns the nth 
         * word of the array list in WordDictionary
         */
-         if ("nth".equalsIgnoreCase(argWord) && args.length == 2) {
+        else if ("nth".equalsIgnoreCase(argWord) && args.length == 2) {
             /**
              * A lambda expression that implements the Wordable interface to retrieve the nth word from the dictionary.
              * It uses the integer parameter 'n' as a zero-based index to get a specific word from the WordDictionary.
@@ -81,20 +92,21 @@ public class Main {
              * @param n The zero-based index of the word to retrieve from the dictionary.
              * @return The word located at the specified index 'n' in the dictionary list.
              */
-            Wordable wordy= (s,n) -> {
-           String nthWord = WordDictionary.getWords().get(n);
-            return nthWord;
+            wordy = (s, n) -> {
+                if (n >= MIN_WORD_SIZE && n < WordDictionary.getWords().size()) {
+                    return WordDictionary.getWords().get(n);
+                }
+                return "Index " + n + " is out of bounds.";
+            };
 
-        };
-
-            String nthWord = wordy.createString(argWord,argInt);
+           /* String nthWord = wordy.createString(argWord,argInt);
             System.out.println("\nCommand Line argument : " + argWord + " args[1]: " + argInt+ " will return the "+ (argInt+1) + "th word of the list ");
-            System.out.println("Which is : " + nthWord);
+            System.out.println("Which is : " + nthWord);*/
         } 
         /*If the only command line argument is 'reverse' the Wordable returns the 
         * word of the array list in WordDictionary
         */
-        if ("reverse".equalsIgnoreCase(argWord) && args.length == 1) {
+        else if ("reverse".equalsIgnoreCase(argWord) && args.length == 1) {
           /**
            * A lambda expression that implements the Wordable interface to reverse each word and concatenate them.
            * It iterates through the list of words from WordDictionary, reverses each word individually,
@@ -104,7 +116,7 @@ public class Main {
            * @return A single string containing the concatenation of all words from the dictionary after each has
            *         been reversed.
            */
-            Wordable wordy = (s, n) -> {
+             wordy = (s, n) -> {
             String result = "";
             for (String word : WordDictionary.getWords()) {
                 String reversedWord = "";
@@ -116,10 +128,19 @@ public class Main {
             return result;
         };
             
-            String reverseString = wordy.createString(argWord, 0);
+           /*  String reverseString = wordy.createString(argWord, 0);
             System.out.println("\nCommand Line argument : " + argWord);
-            System.out.println(reverseString);
-        }
+            System.out.println(reverseString);*/
+        } else {  System.out.println("Not a valid command line option.");
+            return;}
+          
+               // Prints the outcome of wordy based on the args given
+        String result = dictionary.getWords(argWord, argInt, wordy);
+        System.out.println("\n"+result);
+          
+          
+          
+          
             /**
              * A Runnable that holds a method reference to the static {@link #printAll()} method.
              * This demonstrates a method reference to a static method. When {@code run()} is called

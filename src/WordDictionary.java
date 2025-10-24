@@ -69,7 +69,7 @@ public class WordDictionary {
     /**
      * Private constructor to prevent instantiation of this utility class.
      */
-    private WordDictionary() {
+    public WordDictionary() {
         // This class is not meant to be instantiated.
     }
 /**
