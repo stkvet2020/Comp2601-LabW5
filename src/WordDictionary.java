@@ -81,7 +81,21 @@ public class WordDictionary {
         return MORE_WORDS_THAT_BEGIN_WITH_JA;
     }
 
+      /**
+     * A Wordable method.
+     * @param wordArg A string input.
+     * @param numberArg An int input.
+     * @param w A Wordable input.
+     * @return the input String and int.
+     */
+    public String getWords(String wordArg, int numberArg, Wordable w) {
+        // Set to take the same amount of variables as wordable. One string and one Int.
 
+        // Returns worables createString method, passing in the two variables taken.
+        return w.createString(wordArg, numberArg);
+
+    }
+   
 
 
 }
