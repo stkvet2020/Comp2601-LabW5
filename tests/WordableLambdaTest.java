@@ -50,4 +50,25 @@ public class WordableLambdaTest {
 
 } // end of nth
 
+    @Test
+    @DisplayName("Test reverse lambda with first argument 'reverse' and no second argument:")
+    void testReverseLambda() {
+        Wordable reverse = (s, n) -> {
+            String result = "";
+            for (String word : WordDictionary.getWords()) {
+                String reversedWord = "";
+                for (int i = word.length() - 1; i >= 0; i--) {
+                    reversedWord += word.charAt(i);
+                }
+                result += reversedWord;
+            }
+            return result;
+
+                };
+        String expected = "bajdebbajrebbajadnaracajeikcajgnikcajskcajnibocajsutcajizzucajsizzucajedajdedajetiedajsetiedajsroliajsliajrupiajseisuolajmajaciamajnaciamajsnaciamajbmajeerobmajseerobmajsbmajsemajyemajeimajdemmajgnimmajymmajsmajnajgnilgnajecinajnapajesenapajepajgninobwajgniwajswajyajsyajseevyajklawyajyzzaj";
+        assertEquals(expected, reverse.createString("reverse", 0));
+
+    }
+
+
 }
