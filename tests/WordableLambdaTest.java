@@ -1,8 +1,12 @@
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+
 import static org.junit.jupiter.api.Assertions.*;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
+
+
 
 public class WordableLambdaTest {
 
@@ -69,6 +73,26 @@ public class WordableLambdaTest {
         assertEquals(expected, reverse.createString("reverse", 0));
 
     }
+
+    @Test
+    @DisplayName("Testing the method reference -printAll")
+    void testPrintAll(){
+        PrintStream originalOut = System.out;
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+        Main.printAll();
+        System.setOut(originalOut);
+        StringBuilder expectedOutput = new StringBuilder();
+        expectedOutput.append("\nDefault implementation of method reference:");
+        expectedOutput.append("\n    All words in the dictionary:");
+        expectedOutput.append(System.lineSeparator());
+        WordDictionary.getWords().forEach(word -> expectedOutput.append(word).append(System.lineSeparator()));
+
+
+        assertEquals(expectedOutput.toString().trim(), outContent.toString().trim());
+
+    }// end of function
+
 
 
 }
